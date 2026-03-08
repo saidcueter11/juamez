@@ -1,5 +1,6 @@
 ---
 import { useTranslations, type Lang } from '../i18n/utils';
+import Icon from './Icon.astro';
 
 interface Props {
 	lang: Lang;
@@ -16,7 +17,7 @@ const successPath = lang === 'es' ? '/gracias' : '/en/thank-you';
 	action={successPath}
 	data-netlify="true"
 	netlify-honeypot="bot-field"
-	class="section-card rounded-4xl p-6 sm:p-8"
+	class="reveal-right section-card rounded-4xl p-6 sm:p-8"
 >
 	<input type="hidden" name="form-name" value="juamez-contact" />
 	<p class="hidden">
@@ -54,7 +55,8 @@ const successPath = lang === 'es' ? '/gracias' : '/en/thank-you';
 
 	<div class="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
 		<p class="max-w-sm text-sm leading-6 text-brand-brown/75">{t.contact.note}</p>
-		<button type="submit" class="rounded-full bg-brand-green px-6 py-3 text-sm font-bold text-white transition hover:bg-brand-brown">
+		<button type="submit" class="inline-flex items-center gap-2 rounded-full bg-brand-green px-6 py-3 text-sm font-bold text-white transition hover:bg-brand-brown">
+			<Icon name="send" size={16} />
 			{t.contact.labels.submit}
 		</button>
 	</div>

@@ -1,5 +1,6 @@
 ---
 import BrandMark from './BrandMark.astro';
+import Icon from './Icon.astro';
 import { alternateLang, localizePath, sectionPath, useTranslations, type Lang } from '../i18n/utils';
 
 interface Props {
@@ -34,15 +35,17 @@ const links = [
 			<div class="hidden items-center gap-3 lg:flex">
 				<a
 					href={sectionPath(lang, 'contact')}
-					class="rounded-full bg-brand-brown px-4 py-2 text-sm font-bold text-white transition hover:bg-brand-brown-soft"
+					class="inline-flex items-center gap-2 rounded-full bg-brand-brown px-4 py-2 text-sm font-bold text-white transition hover:bg-brand-brown-soft"
 				>
+					<Icon name="message-circle" size={15} />
 					{t.nav.contact}
 				</a>
 				<a
 					href={switchPath}
 					hreflang={nextLang}
-					class="rounded-full border border-brand-brown/12 bg-white/70 px-4 py-2 text-sm font-bold text-brand-brown transition hover:border-brand-brown/30 hover:bg-white"
+					class="inline-flex items-center gap-2 rounded-full border border-brand-brown/12 bg-white/70 px-4 py-2 text-sm font-bold text-brand-brown transition hover:border-brand-brown/30 hover:bg-white"
 				>
+					<Icon name="languages" size={15} />
 					{t.nav.language}
 				</a>
 			</div>

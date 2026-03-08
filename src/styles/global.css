@@ -145,8 +145,61 @@
 	}
 }
 
+@keyframes fade-in-down {
+	from {
+		opacity: 0;
+		transform: translateY(-1rem);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes slide-in-left {
+	from {
+		opacity: 0;
+		transform: translateX(-2rem);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+@keyframes slide-in-right {
+	from {
+		opacity: 0;
+		transform: translateX(2rem);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+@keyframes scale-in {
+	from {
+		opacity: 0;
+		transform: scale(0.92);
+	}
+	to {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+@keyframes float {
+	0%, 100% { transform: translateY(0); }
+	50% { transform: translateY(-0.5rem); }
+}
+
 .animate-fade-in-up {
 	animation: fade-in-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-fade-in-down {
+	animation: fade-in-down 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .delay-1 { animation-delay: 100ms; }
@@ -154,19 +207,86 @@
 .delay-3 { animation-delay: 300ms; }
 .delay-4 { animation-delay: 400ms; }
 .delay-5 { animation-delay: 500ms; }
+.delay-6 { animation-delay: 600ms; }
+.delay-7 { animation-delay: 700ms; }
 
-/* Scroll-triggered reveals */
+/* ─── Scroll-triggered reveals ─── */
 .reveal {
+	opacity: 0;
+	transform: translateY(1.5rem);
+	transition:
+		opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+		transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-left {
+	opacity: 0;
+	transform: translateX(-2.5rem);
+	transition:
+		opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+		transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-right {
+	opacity: 0;
+	transform: translateX(2.5rem);
+	transition:
+		opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+		transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-scale {
+	opacity: 0;
+	transform: scale(0.9);
+	transition:
+		opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+		transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.is-visible,
+.reveal-left.is-visible,
+.reveal-right.is-visible,
+.reveal-scale.is-visible {
+	opacity: 1;
+	transform: translateY(0) translateX(0) scale(1);
+}
+
+/* Staggered children — add .stagger-children to parent, each child gets delay */
+.stagger-children > * {
 	opacity: 0;
 	transform: translateY(1.25rem);
 	transition:
-		opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
-		transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+		opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+		transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.reveal.is-visible {
-	opacity: 1;
-	transform: translateY(0);
+.stagger-children.is-visible > *:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 0ms; }
+.stagger-children.is-visible > *:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 80ms; }
+.stagger-children.is-visible > *:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 160ms; }
+.stagger-children.is-visible > *:nth-child(4) { opacity: 1; transform: translateY(0); transition-delay: 240ms; }
+.stagger-children.is-visible > *:nth-child(5) { opacity: 1; transform: translateY(0); transition-delay: 320ms; }
+.stagger-children.is-visible > *:nth-child(6) { opacity: 1; transform: translateY(0); transition-delay: 400ms; }
+.stagger-children.is-visible > *:nth-child(7) { opacity: 1; transform: translateY(0); transition-delay: 480ms; }
+.stagger-children.is-visible > *:nth-child(8) { opacity: 1; transform: translateY(0); transition-delay: 560ms; }
+
+/* Gentle floating for decorative elements */
+.animate-float {
+	animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-slow {
+	animation: float 8s ease-in-out infinite;
+	animation-delay: -2s;
+}
+
+/* ─── Hover micro-interactions ─── */
+.hover-lift {
+	transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+}
+
+.hover-lift:hover {
+	transform: translateY(-0.35rem);
+	box-shadow: 0 28px 70px -30px rgb(47 23 9 / 0.38);
 }
 
 /* Scroll anchors */
@@ -176,7 +296,14 @@
 
 @media (prefers-reduced-motion: reduce) {
 	.animate-fade-in-up,
-	.reveal {
+	.animate-fade-in-down,
+	.animate-float,
+	.animate-float-slow,
+	.reveal,
+	.reveal-left,
+	.reveal-right,
+	.reveal-scale,
+	.stagger-children > * {
 		animation: none !important;
 		opacity: 1 !important;
 		transform: none !important;
