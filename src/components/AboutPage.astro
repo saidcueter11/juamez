@@ -1,7 +1,6 @@
 ---
 import Navbar from './Navbar.astro';
 import Footer from './Footer.astro';
-import ClientsBar from './ClientsBar.astro';
 import Icon from './Icon.astro';
 import { useTranslations, type Lang } from '../i18n/utils';
 
@@ -77,9 +76,6 @@ const t = useTranslations(lang);
 				))}
 			</div>
 		</section>
-
-		<!-- Clients -->
-		<ClientsBar lang={lang} />
 
 		<!-- Gallery placeholders -->
 		<section class="container-shell mt-16 sm:mt-20">
