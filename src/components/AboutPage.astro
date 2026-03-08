@@ -1,0 +1,107 @@
+---
+import Navbar from './Navbar.astro';
+import Footer from './Footer.astro';
+import ClientsBar from './ClientsBar.astro';
+import { useTranslations, type Lang } from '../i18n/utils';
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<div class="relative isolate overflow-hidden">
+	<Navbar lang={lang} />
+
+	<main class="pb-10 pt-6 sm:pt-8">
+		<!-- Hero banner -->
+		<section class="container-shell relative pb-14 text-white sm:pb-18">
+			<div class="absolute inset-y-0 left-1/2 -z-10 w-screen -translate-x-1/2 bg-[linear-gradient(135deg,#2f1709_0%,#59331d_55%,#2f1709_100%)]"></div>
+			<div class="absolute inset-y-0 left-1/2 -z-10 w-screen -translate-x-1/2 bg-[radial-gradient(circle_at_top_left,rgba(224,194,59,0.34),transparent_32%)]"></div>
+
+			<div class="mx-auto max-w-3xl py-10 text-center sm:py-16 animate-fade-in-up">
+				<p class="eyebrow mx-auto bg-white/12 text-white ring-1 ring-white/12">{t.about.eyebrow}</p>
+				<h1 class="mt-6 font-display text-4xl leading-tight sm:text-5xl md:text-6xl">{t.about.title}</h1>
+				<p class="mx-auto mt-6 max-w-2xl text-base leading-8 text-white/90 sm:text-lg">{t.about.description}</p>
+			</div>
+		</section>
+
+		<!-- Placeholder: large about/team image -->
+		<section class="container-shell -mt-8">
+			<div class="overflow-hidden rounded-4xl border border-brand-brown/8 shadow-[0_28px_90px_-40px_rgba(47,23,9,0.3)]">
+				<div class="flex aspect-21/9 items-center justify-center bg-brand-brown/8 text-sm text-brand-brown/50">
+					<!-- IMAGE PLACEHOLDER: about-hero.jpg — team, warehouse, or field panoramic -->
+					<span>📷 Imagen principal del equipo / operación</span>
+				</div>
+			</div>
+		</section>
+
+		<!-- Mission, Vision, Values -->
+		<section class="container-shell mt-16 sm:mt-20">
+			<div class="grid gap-6 lg:grid-cols-3">
+				<div class="rounded-[2.25rem] border border-brand-brown/12 bg-[linear-gradient(160deg,#2f1709_0%,#59331d_100%)] px-6 py-8 text-white shadow-[0_28px_90px_-40px_rgba(47,23,9,0.55)]">
+					<h2 class="text-sm font-black uppercase tracking-[0.22em] text-brand-yellow">{t.about.mission.title}</h2>
+					<p class="mt-4 text-base leading-8 text-white/92">{t.about.mission.copy}</p>
+				</div>
+
+				<div class="rounded-[2.25rem] border border-brand-brown/12 bg-[linear-gradient(160deg,#2f1709_0%,#59331d_100%)] px-6 py-8 text-white shadow-[0_28px_90px_-40px_rgba(47,23,9,0.55)]">
+					<h2 class="text-sm font-black uppercase tracking-[0.22em] text-brand-yellow">{t.about.vision.title}</h2>
+					<p class="mt-4 text-base leading-8 text-white/92">{t.about.vision.copy}</p>
+				</div>
+
+				<div class="rounded-[2.25rem] border border-brand-brown/12 bg-[linear-gradient(160deg,#2f1709_0%,#59331d_100%)] px-6 py-8 text-white shadow-[0_28px_90px_-40px_rgba(47,23,9,0.55)]">
+					<h2 class="text-sm font-black uppercase tracking-[0.22em] text-brand-yellow">{t.about.values.title}</h2>
+					<div class="mt-4 flex flex-wrap gap-2">
+						{t.about.values.items.map((value) => (
+							<span class="rounded-full border border-white/15 bg-white/8 px-4 py-2 text-sm font-semibold text-white/90">{value}</span>
+						))}
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Highlights -->
+		<section class="container-shell mt-16 sm:mt-20">
+			<div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+				{t.about.highlights.map((highlight) => (
+					<article class="rounded-4xl border border-brand-brown/8 bg-white/98 p-8 shadow-[0_24px_80px_-36px_rgb(47_23_9/0.22)]">
+						<p class="text-sm font-black uppercase tracking-[0.22em] text-brand-green">{highlight.title}</p>
+						<p class="mt-4 text-base leading-7 text-brand-brown/90">{highlight.copy}</p>
+					</article>
+				))}
+			</div>
+		</section>
+
+		<!-- Clients -->
+		<ClientsBar lang={lang} />
+
+		<!-- Gallery placeholders -->
+		<section class="container-shell mt-16 sm:mt-20">
+			<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+				{[1, 2, 3].map((i) => (
+					<div class="overflow-hidden rounded-3xl border border-brand-brown/8">
+						<div class="flex aspect-4/3 items-center justify-center bg-brand-brown/8 text-sm text-brand-brown/50">
+							<!-- IMAGE PLACEHOLDER: about-gallery-{i}.jpg -->
+							<span>📷 Galería {i}</span>
+						</div>
+					</div>
+				))}
+			</div>
+		</section>
+	</main>
+
+	<Footer lang={lang} />
+
+	<!-- Back to top -->
+	<button
+		id="back-to-top"
+		aria-label="Back to top"
+		class="fixed bottom-6 right-6 z-50 flex size-12 items-center justify-center rounded-full bg-brand-brown text-white shadow-lg opacity-0 pointer-events-none translate-y-3 transition-all duration-300 hover:bg-brand-brown-soft hover:shadow-xl sm:bottom-8 sm:right-8"
+	>
+		<svg class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+			<path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
+		</svg>
+	</button>
+</div>

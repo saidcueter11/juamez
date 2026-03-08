@@ -1,0 +1,23 @@
+---
+import BrandMark from '../../components/BrandMark.astro';
+import { useTranslations } from '../../i18n/utils';
+import Layout from '../../layouts/Layout.astro';
+
+const lang = 'en';
+const t = useTranslations(lang);
+---
+
+<Layout lang={lang} title={t.contact.successTitle} description={t.contact.successDescription} pathname={Astro.url.pathname}>
+	<main class="container-shell flex min-h-screen items-center justify-center py-12">
+		<section class="section-card w-full max-w-2xl rounded-[2.5rem] bg-brand-brown px-6 py-10 text-center text-white sm:px-10">
+			<div class="mx-auto flex w-fit items-center justify-center rounded-full bg-white/10 p-3">
+				<BrandMark light compact />
+			</div>
+			<h1 class="mt-6 font-display text-4xl sm:text-5xl">{t.contact.successTitle}</h1>
+			<p class="mx-auto mt-4 max-w-xl text-base leading-8 text-white/76">{t.contact.successDescription}</p>
+			<a href="/en/" class="mt-8 inline-flex rounded-full bg-brand-yellow px-6 py-3 text-sm font-bold text-brand-brown transition hover:bg-white">
+				{t.contact.backHome}
+			</a>
+		</section>
+	</main>
+</Layout>

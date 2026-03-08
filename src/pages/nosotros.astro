@@ -1,0 +1,12 @@
+---
+import Layout from '../layouts/Layout.astro';
+import AboutPage from '../components/AboutPage.astro';
+import { useTranslations } from '../i18n/utils';
+
+const lang = 'es' as const;
+const t = useTranslations(lang);
+---
+
+<Layout lang={lang} title={`${t.about.eyebrow} | Juamez`} description={t.about.description} pathname={Astro.url.pathname}>
+	<AboutPage lang={lang} />
+</Layout>

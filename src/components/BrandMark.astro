@@ -1,0 +1,19 @@
+---
+interface Props {
+	light?: boolean;
+	compact?: boolean;
+}
+
+const { light = false, compact = false } = Astro.props;
+const widthClass = compact ? 'w-36 sm:w-40' : 'w-44 sm:w-52';
+const shellClass = light
+	? 'bg-white/10 ring-1 ring-white/12'
+	: 'bg-brand-brown shadow-[0_14px_30px_-18px_rgba(47,23,9,0.55)]';
+---
+
+<span class:list={[
+	'inline-flex items-center rounded-[1.4rem] px-4 py-2',
+	shellClass,
+]}>
+	<img src="/images/logo.png" alt="Juamez" class:list={['h-auto', widthClass]} />
+</span>

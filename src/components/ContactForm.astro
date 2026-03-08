@@ -1,0 +1,61 @@
+---
+import { useTranslations, type Lang } from '../i18n/utils';
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const successPath = lang === 'es' ? '/gracias' : '/en/thank-you';
+---
+
+<form
+	name="juamez-contact"
+	method="POST"
+	action={successPath}
+	data-netlify="true"
+	netlify-honeypot="bot-field"
+	class="section-card rounded-4xl p-6 sm:p-8"
+>
+	<input type="hidden" name="form-name" value="juamez-contact" />
+	<p class="hidden">
+		<label>
+			Do not fill this out if you're human: <input name="bot-field" />
+		</label>
+	</p>
+
+	<div class="grid gap-4">
+		<div>
+			<label for="name" class="mb-2 block text-sm font-semibold text-brand-brown">{t.contact.labels.name}</label>
+			<input id="name" name="name" type="text" required class="input-shell" placeholder={t.contact.placeholders.name} />
+		</div>
+
+		<div>
+			<label for="email" class="mb-2 block text-sm font-semibold text-brand-brown">{t.contact.labels.email}</label>
+			<input id="email" name="email" type="email" required class="input-shell" placeholder={t.contact.placeholders.email} />
+		</div>
+
+		<div>
+			<label for="company" class="mb-2 block text-sm font-semibold text-brand-brown">{t.contact.labels.company}</label>
+			<input id="company" name="company" type="text" class="input-shell" placeholder={t.contact.placeholders.company} />
+		</div>
+
+		<div>
+			<label for="phone" class="mb-2 block text-sm font-semibold text-brand-brown">{t.contact.labels.phone}</label>
+			<input id="phone" name="phone" type="tel" class="input-shell" placeholder={t.contact.placeholders.phone} />
+		</div>
+
+		<div>
+			<label for="message" class="mb-2 block text-sm font-semibold text-brand-brown">{t.contact.labels.message}</label>
+			<textarea id="message" name="message" rows="6" required class="input-shell resize-y" placeholder={t.contact.placeholders.message}></textarea>
+		</div>
+	</div>
+
+	<div class="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+		<p class="max-w-sm text-sm leading-6 text-brand-brown/75">{t.contact.note}</p>
+		<button type="submit" class="rounded-full bg-brand-green px-6 py-3 text-sm font-bold text-white transition hover:bg-brand-brown">
+			{t.contact.labels.submit}
+		</button>
+	</div>
+</form>

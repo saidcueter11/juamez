@@ -1,0 +1,18 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import LandingPage from '../../components/LandingPage.astro';
+import { useTranslations } from '../../i18n/utils';
+import Layout from '../../layouts/Layout.astro';
+
+const lang = 'en' as const;
+const t = useTranslations(lang);
+const products: CollectionEntry<'products'>[] = (await getCollection('products'))
+	.filter((product: CollectionEntry<'products'>) => product.data.locale === lang)
+	.sort(
+	(a: CollectionEntry<'products'>, b: CollectionEntry<'products'>) => a.data.order - b.data.order,
+);
+---
+
+<Layout lang={lang} title={t.meta.title} description={t.meta.description} pathname={Astro.url.pathname}>
+	<LandingPage lang={lang} products={products} />
+</Layout>

@@ -1,0 +1,50 @@
+---
+import '../styles/global.css';
+import { languages, localizePath, type Lang } from '../i18n/utils';
+
+interface Props {
+	title: string;
+	description: string;
+	lang: Lang;
+	pathname?: string;
+}
+
+const { title, description, lang, pathname = Astro.url.pathname } = Astro.props;
+
+const canonical = Astro.site ? new URL(pathname, Astro.site) : undefined;
+---
+
+<!doctype html>
+<html lang={lang} class="scroll-smooth">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="description" content={description} />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:site_name" content="Juamez" />
+		<meta property="og:locale" content={lang === 'es' ? 'es_CO' : 'en_US'} />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		{canonical && <link rel="canonical" href={canonical.toString()} />}
+		{
+			Astro.site &&
+			Object.keys(languages).map((locale) => (
+				<link
+					rel="alternate"
+					hreflang={locale}
+					href={new URL(localizePath(locale as Lang, pathname), Astro.site).toString()}
+				/>
+			))
+		}
+		<title>{title}</title>
+	</head>
+	<body class="min-h-screen bg-sand text-stone-950">
+		<slot />
+	</body>
+</html>

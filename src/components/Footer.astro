@@ -1,0 +1,36 @@
+---
+import BrandMark from './BrandMark.astro';
+import { localizePath, sectionPath, useTranslations, type Lang } from '../i18n/utils';
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const links = [
+	{ label: t.nav.company, href: sectionPath(lang, 'about') },
+	{ label: t.nav.products, href: sectionPath(lang, 'products') },
+	{ label: t.nav.process, href: sectionPath(lang, 'process') },
+	{ label: t.nav.contact, href: sectionPath(lang, 'contact') },
+];
+---
+
+<footer class="container-shell pb-8 pt-4 sm:pb-10">
+	<div class="section-card flex flex-col gap-6 rounded-[2rem] px-6 py-6 sm:px-8 lg:flex-row lg:items-end lg:justify-between">
+		<div class="space-y-3">
+			<a href={localizePath(lang, '/')} class="inline-flex items-center gap-3">
+				<BrandMark compact />
+			</a>
+			<p class="max-w-xl text-sm leading-6 text-brand-brown/80">{t.footer.tagline}</p>
+			<p class="text-xs text-brand-brown/60">📍 {t.footer.location}</p>
+		</div>
+
+		<div class="flex flex-col gap-3 text-sm font-semibold text-brand-brown/80 sm:items-end">
+			<div class="flex flex-wrap gap-4">
+				{links.map((link) => <a href={link.href} class="transition hover:text-brand-brown">{link.label}</a>)}
+			</div>
+			<p>{t.footer.legal}</p>
+		</div>
+	</div>
+</footer>
